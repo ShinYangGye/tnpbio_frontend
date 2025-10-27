@@ -1,9 +1,9 @@
 <script setup></script>
 
 <template>
-  <div class="container p-1">
+  <div class="container d-none d-md-block" style="padding: 25px">
     <RouterLink class="navbar-brand" :to="{ name: 'home' }"
-      ><img src="@/assets/images/tnp_logo_sm.png" style="width: 100px"
+      ><img src="@/assets/images/tnp_logo_sm.png" style="width: 160px"
     /></RouterLink>
   </div>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Tenth navbar example">
@@ -26,6 +26,9 @@
       >
         <!-- <RouterLink class="navbar-brand" :to="{ name: 'home' }">TNP Bio</RouterLink> -->
         <ul class="navbar-nav">
+          <li class="nav-item mx-3">
+            <RouterLink class="nav-link active" :to="{ name: 'home' }">메인으로</RouterLink>
+          </li>
           <li class="nav-item mx-3">
             <RouterLink class="nav-link active" :to="{ name: 'product' }"
               >분야별 제품정보</RouterLink

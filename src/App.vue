@@ -17,7 +17,7 @@ bannerStore.doGetBannerList();
     <!-- 공통 헤더 -->
     <CommHeader />
     <!-- // 공통 헤더 -->
-    <main>
+    <main style="margin-bottom: 200px">
       <!-- 공통 배너 -->
       <CommBanner :items="bannerStore.state.items" v-show="route.name == 'home'" />
       <!-- // 공통 배너 -->
