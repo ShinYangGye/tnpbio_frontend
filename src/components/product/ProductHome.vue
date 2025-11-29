@@ -1,4 +1,3 @@
-<script setup></script>
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
 import { useProductStore } from '../../stores/productStore';
@@ -7,6 +6,8 @@ const productStore = useProductStore();
 
 const router = useRouter();
 const route = useRoute();
+
+// document.getElementById('top1').style.display = 'none';
 
 const goProductList = (subId) => {
   let mainId = route.query.mainId;

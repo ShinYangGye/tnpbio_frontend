@@ -26,7 +26,7 @@ bannerStore.doGetBannerList();
       <CommMainImg />
       <!-- // 메인 이미지 -->
       <div class="container marketing">
-        <router-view />
+        <router-view :key="route.fullPath" />
       </div>
     </main>
 

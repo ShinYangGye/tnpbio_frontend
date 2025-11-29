@@ -25,12 +25,18 @@ eventStore.doGetEventDetail(route.query.id);
         style="max-width: 100%"
       />
     </div>
-    <div class="m-1 text-center" v-if="eventStore.state.itemDetail.file">
+    <div class="m-1 text-center">
       <a
         class="btn btn-sm btn-danger"
         :href="`${baseURL}/event/files/${eventStore.state.itemDetail.file.savedFileName}`"
         target="_blank"
+        v-if="eventStore.state.itemDetail.file"
         >이벤트 내용 상세보기</a
+      >
+      <router-link
+        class="btn btn-sm btn-secondary mx-1"
+        :to="{ name: 'event', query: { status: 'A' } }"
+        >목록</router-link
       >
     </div>
   </div>
