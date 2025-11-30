@@ -15,11 +15,16 @@ eventStore.doGetEventDetail(route.query.id);
       >이벤트
     </p>
     <hr class="mb-2" />
-    <div class="h4 m-1">{{ eventStore.state.itemDetail.title }}</div>
+    <div class="bg-secondary-subtle p-2">
+      <div class="h4 m-1">{{ eventStore.state.itemDetail.title }}</div>
+      <div class="text-end">
+        <span>{{ eventStore.state.itemDetail.regAt.substring(0, 10) }}</span>
+      </div>
+    </div>
     <div class="m-1 wrap-text">
       {{ eventStore.state.itemDetail.contents }}
     </div>
-    <div class="m-1" v-if="eventStore.state.itemDetail.imgFile">
+    <div class="m-1 text-center" v-if="eventStore.state.itemDetail.imgFile">
       <img
         :src="`${baseURL}/event/files/${eventStore.state.itemDetail.imgFile.savedFileName}`"
         style="max-width: 100%"

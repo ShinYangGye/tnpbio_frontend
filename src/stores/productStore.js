@@ -29,6 +29,8 @@ export const useProductStore = defineStore('product', () => {
     products: [],
     productDetail: {},
     navString: '제품정보',
+    navMainMenu: '',
+    navSubMenu: '',
   });
 
   // 메뉴 목록 조회
@@ -60,6 +62,7 @@ export const useProductStore = defineStore('product', () => {
         }
 
         state.navString = state.menuDetail.name;
+        state.navMainMenu = state.menuDetail.name;
       } else {
         toast.info('데이타 조회시 오류가 발생했습니다. 잠시후 다시 확인해 주세요.');
       }
@@ -79,6 +82,7 @@ export const useProductStore = defineStore('product', () => {
 
       state.menuMainId = menu.id;
       state.navString = state.menuDetail.name;
+      // state.navMainMenu = state.menuDetail.name;
     } catch (error) {
       toast.error('데이타 조회시 오류가 발생했습니다. 잠시후 다시 확인해 주세요.');
       console.log(error);
@@ -88,25 +92,18 @@ export const useProductStore = defineStore('product', () => {
   // 상품 목록 조회
   async function doGetProducts(subId) {
     try {
-      // doGetMenus();
-      // 메뉴 네비 세팅
-      let mainMenuName = '';
-      let subMenuName = '';
       let resMenu = await getMenus();
-
       const menuInfo = resMenu.data.find((item) => item.id == state.menuMainId);
-      mainMenuName = menuInfo.menuName;
+
       state.menuSubDetail = menuInfo.menuSub.find((item) => item.id == state.menuSubId);
-      subMenuName = state.menuSubDetail.menuName;
-      console.log('--------------', menuInfo);
-      state.navString = mainMenuName + ' ▶ ' + subMenuName;
-      // 메뉴 네비 세팅
+
+      state.navMainMenu = menuInfo.menuName;
+      state.navSubMenu = state.menuSubDetail.menuName;
 
       let res = await getProductList(subId);
 
       if (res.status == 200) {
         state.products = res.data;
-        // state.menuSubDetail = state.menuDetail.menuSub.find((item) => item.id == subId);
       } else {
         toast.error('데이타 조회시 오류가 발생했습니다. 잠시후 다시 확인해 주세요1');
       }
@@ -135,17 +132,10 @@ export const useProductStore = defineStore('product', () => {
   // 상품 상세 조회
   async function doGetProductDetail(id) {
     try {
-      // 메뉴 네비 세팅
-      let mainMenuName = '';
-      let subMenuName = '';
-      let resMenu = await getMenus();
-
-      const menuInfo = resMenu.data.find((item) => item.id == state.menuMainId);
-      mainMenuName = menuInfo.menuName;
-      state.menuSubDetail = menuInfo.menuSub.find((item) => item.id == state.menuSubId);
-      subMenuName = state.menuSubDetail.menuName;
-      state.navString = mainMenuName + ' ▶ ' + subMenuName;
-      // 메뉴 네비 세팅
+      // let resMenu = await getMenus();
+      // const menuInfo = resMenu.data.find((item) => item.id == state.menuMainId);
+      // state.menuSubDetail = menuInfo.menuSub.find((item) => item.id == state.menuSubId);
+      // state.navSubMenu = state.menuSubDetail.menuName;
 
       let res = await getProductDetail(id);
 

@@ -1,8 +1,20 @@
 <script setup>
+import ProductNavbar from '@/components/product/ProductNavbar.vue';
 import ProductList from '@/components/product/ProductList.vue';
 </script>
 <template>
   <div>
-    <ProductList />
+    <p class="h5 d-flex mt-2">
+      <span style="padding-top: 0px; padding-right: 5px"
+        ><i class="bi bi-square" style="font-size: 20px"></i></span
+      >분야별 제품정보
+    </p>
+    <hr class="mb-2" />
+    <div class="container text-center">
+      <div>
+        <ProductNavbar />
+      </div>
+      <div><ProductList /></div>
+    </div>
   </div>
 </template>

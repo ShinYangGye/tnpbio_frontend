@@ -169,7 +169,8 @@ onMounted(() => {
                   class="text-decoration-none"
                 >
                   <strong>{{ item.title }}</strong> <br />
-                  <span>{{ item.summary }}</span>
+                  <span>{{ item.summary }}</span> <br />
+                  <span>{{ item.regAt.substring(0, 10) }}</span>
                 </RouterLink>
               </td>
               <td class="align-middle" width="80">
@@ -217,7 +218,8 @@ onMounted(() => {
                   class="text-decoration-none"
                 >
                   <strong>{{ item.title }}</strong> <br />
-                  <span>{{ item.summary }}</span>
+                  <span>{{ item.summary }}</span> <br />
+                  <span>{{ item.regAt.substring(0, 10) }}</span>
                 </RouterLink>
               </td>
               <td class="align-middle" width="80">
@@ -289,5 +291,10 @@ onMounted(() => {
 }
 .text-decoration-none:hover {
   color: blue;
+}
+
+.nav-link {
+  background-color: #eee;
+  color: #999;
 }
 </style>

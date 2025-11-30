@@ -1,5 +1,19 @@
 <script setup>
-import BrandList from '@/components/brand/BrandList.vue';
+import BrandList from '@/components/top/BrandList.vue';
+import ProductLayout from '@/components/top/ProductLayout.vue';
+
+import { useProductStore } from '../../stores/productStore';
+const productStore = useProductStore();
+
+const setProductDivShow = () => {
+  document.getElementById('top1').style.display = 'block';
+  document.getElementById('top2').style.display = 'none';
+  document.getElementById('top3').style.display = 'none';
+
+  if (productStore.state.menuMainId == 0) {
+    productStore.state.menuMainId = productStore.state.menus[0].id;
+  }
+};
 </script>
 <template>
   <div class="container d-none d-md-block" style="padding: 25px">
@@ -36,14 +50,8 @@ import BrandList from '@/components/brand/BrandList.vue';
           >
             <RouterLink class="nav-link active" :to="{ name: 'home' }">메인으로</RouterLink>
           </li>
-          <li
-            class="nav-item mx-3"
-            onmouseover="document.getElementById('top1').style.display='block'; document.getElementById('top2').style.display='none';document.getElementById('top3').style.display='none';"
-            onclick="document.getElementById('top1').style.display='none';"
-          >
-            <RouterLink class="nav-link active" :to="{ name: 'product' }"
-              >분야별 제품정보</RouterLink
-            >
+          <li class="nav-item mx-3" @mouseover="setProductDivShow">
+            <span class="nav-link active" style="cursor: pointer">분야별 제품정보</span>
           </li>
           <li
             class="nav-item mx-3"
@@ -74,8 +82,13 @@ import BrandList from '@/components/brand/BrandList.vue';
     </div>
   </nav>
   <div class="top1_div justify-content-center" id="top1">
-    <!-- onmouseout="document.getElementById('top1').style.display='none';" -->
-    <div class="container bg-white border border-secondary">분야별제품정보 페이지 DIV 11111</div>
+    <div
+      class="container bg-white border border-2 border-secondary"
+      style="padding-bottom: 7px"
+      onmouseleave="document.getElementById('top1').style.display = 'none'"
+    >
+      <ProductLayout />
+    </div>
   </div>
   <div class="top2_div justify-content-center" id="top2">
     <div
