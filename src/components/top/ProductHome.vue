@@ -1,23 +1,13 @@
 <script setup>
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { useProductStore } from '../../stores/productStore';
 const baseURL = import.meta.env.VITE_APP_API;
 const productStore = useProductStore();
 
 const router = useRouter();
-const route = useRoute();
-
-// document.getElementById('top1').style.display = 'none';
-
 const goProductList = (subId) => {
   document.getElementById('top1').style.display = 'none';
   let mainId = productStore.state.menuMainId;
-
-  /*
-  if (mainId == null || mainId == undefined) {
-    mainId = productStore.state.menus[0].id;
-  }
-*/
   router.push({ name: 'product-list', query: { mainId: mainId, subId: subId } });
 };
 </script>

@@ -5,6 +5,9 @@ const baseURL = import.meta.env.VITE_APP_API;
 const route = useRoute();
 const id = route.query.id;
 const productStore = useProductStore();
+
+productStore.state.menuMainId = route.query.mainId;
+productStore.state.menuSubId = route.query.subId;
 productStore.doGetProductDetail(id);
 </script>
 <template>

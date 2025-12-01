@@ -16,7 +16,11 @@ const setProductDivShow = () => {
 };
 </script>
 <template>
-  <div class="container d-none d-md-block" style="padding: 25px">
+  <div
+    class="container d-none d-md-block"
+    style="padding: 25px"
+    onmouseover="document.getElementById('top1').style.display='none'; document.getElementById('top2').style.display='none';document.getElementById('top3').style.display='none';"
+  >
     <RouterLink class="navbar-brand" :to="{ name: 'home' }"
       ><img src="@/assets/images/tnp_logo_sm.png" style="width: 160px"
     /></RouterLink>

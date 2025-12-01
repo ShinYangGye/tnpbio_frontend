@@ -26,7 +26,8 @@ const getMenuMain = async (mainId) => await axiosInterceptor.get(`/menu/main/${m
 const getMenuSub = async (subId) => await axiosInterceptor.get(`/menu/sub/${subId}`);
 
 // 상품 목록 조회
-const getProductList = async (subId) => await axiosInterceptor.get(`/product/list/${subId}`);
+const getProductList = async (mainId, subId) =>
+  await axiosInterceptor.get(`/product/list/${mainId}/${subId}`);
 
 // 상품 목록 조회
 const getProductTop = async () => await axiosInterceptor.get(`/product/list-top`);

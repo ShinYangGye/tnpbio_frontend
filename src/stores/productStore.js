@@ -90,25 +90,69 @@ export const useProductStore = defineStore('product', () => {
   }
 
   // 상품 목록 조회
-  async function doGetProducts(subId) {
+  async function doGetProducts() {
     try {
-      let resMenu = await getMenus();
-      const menuInfo = resMenu.data.find((item) => item.id == state.menuMainId);
+      // 상품 목록 조회
+      let resProduct = await getProductList(state.menuMainId, state.menuSubId);
 
-      state.menuSubDetail = menuInfo.menuSub.find((item) => item.id == state.menuSubId);
+      if (resProduct.status == 200) {
+        // 상품목록 데이타 세팅
+        state.products = resProduct.data;
 
-      state.navMainMenu = menuInfo.menuName;
-      state.navSubMenu = state.menuSubDetail.menuName;
+        // 메뉴정보 조회
+        let resMenu = await getMenus();
+        const menuInfo = resMenu.data.find((item) => item.id == state.menuMainId);
 
-      let res = await getProductList(subId);
+        state.menuDetail.name = menuInfo.menuName;
+        state.menuDetail.info = menuInfo.menuInfo;
+        state.menuDetail.fileName = menuInfo.file.savedFileName;
+        state.menuDetail.menuSub = menuInfo.menuSub;
+        state.menuSubDetail = menuInfo.menuSub.find((item) => item.id == state.menuSubId);
 
-      if (res.status == 200) {
-        state.products = res.data;
+        // 상단 네비게이션
+        state.navMainMenu = menuInfo.menuName;
+
+        if (state.menuSubId == 0) {
+          state.menuSubDetail = {};
+          state.navSubMenu = '';
+        } else {
+          state.menuSubDetail = menuInfo.menuSub.find((item) => item.id == state.menuSubId);
+          state.navSubMenu = state.menuSubDetail.menuName;
+        }
       } else {
         toast.error('데이타 조회시 오류가 발생했습니다. 잠시후 다시 확인해 주세요1');
       }
     } catch (error) {
       toast.error('데이타 조회시 오류가 발생했습니다. 잠시후 다시 확인해 주세요2');
+      console.log(error);
+    }
+  }
+
+  // 상품 상세 조회
+  async function doGetProductDetail(id) {
+    try {
+      // 상품정보 조회
+      let resProduct = await getProductDetail(id);
+
+      if (resProduct.status == 200) {
+        // 상품정보 세팅
+        state.productDetail = resProduct.data;
+
+        // 메뉴정보 조회
+        state.menuMainId = resProduct.data.menuMainId;
+        state.menuSubId = resProduct.data.menuSubId;
+        let resMenu = await getMenus();
+        const menuInfo = resMenu.data.find((item) => item.id == state.menuMainId);
+        state.menuSubDetail = menuInfo.menuSub.find((item) => item.id == state.menuSubId);
+
+        // 상단 네비게이션
+        state.navMainMenu = menuInfo.menuName;
+        state.navSubMenu = state.menuSubDetail.menuName;
+      } else {
+        toast.error('데이타 조회시 오류가 발생했습니다. 잠시후 다시 확인해 주세요');
+      }
+    } catch (error) {
+      toast.error('데이타 조회시 오류가 발생했습니다. 잠시후 다시 확인해 주세요');
       console.log(error);
     }
   }
@@ -125,27 +169,6 @@ export const useProductStore = defineStore('product', () => {
       }
     } catch (error) {
       toast.error('데이타 조회시 오류가 발생했습니다. 잠시후 다시 확인해 주세요2');
-      console.log(error);
-    }
-  }
-
-  // 상품 상세 조회
-  async function doGetProductDetail(id) {
-    try {
-      // let resMenu = await getMenus();
-      // const menuInfo = resMenu.data.find((item) => item.id == state.menuMainId);
-      // state.menuSubDetail = menuInfo.menuSub.find((item) => item.id == state.menuSubId);
-      // state.navSubMenu = state.menuSubDetail.menuName;
-
-      let res = await getProductDetail(id);
-
-      if (res.status == 200) {
-        state.productDetail = res.data;
-      } else {
-        toast.error('데이타 조회시 오류가 발생했습니다. 잠시후 다시 확인해 주세요');
-      }
-    } catch (error) {
-      toast.error('데이타 조회시 오류가 발생했습니다. 잠시후 다시 확인해 주세요');
       console.log(error);
     }
   }

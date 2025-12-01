@@ -12,10 +12,10 @@ const subId = route.query.subId;
 
 productStore.state.menuMainId = mainId;
 productStore.state.menuSubId = subId;
-productStore.doGetProducts(subId);
+productStore.doGetProducts();
 
 const goDetail = (id) => {
-  router.push({ name: 'product-detail', query: { mainId, subId, id } });
+  router.push({ name: 'product-detail', query: { id } });
 };
 </script>
 <template>
@@ -24,7 +24,11 @@ const goDetail = (id) => {
       <div class="card h-100">
         <div v-for="(file, i) in prd.files" :key="i">
           <div v-if="file.kind == 'main'">
-            <img class="card-img-top" :src="`${baseURL}/product/image/${file.savedFileName}`" />
+            <img
+              class="card-img-top"
+              :src="`${baseURL}/product/image/${file.savedFileName}`"
+              style="height: 200px"
+            />
           </div>
         </div>
 
