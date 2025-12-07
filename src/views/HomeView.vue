@@ -1,21 +1,135 @@
 <script setup>
 import { useProductStore } from '../stores/productStore';
-import { useEventStore } from '../stores/eventStore';
+// import { useEventStore } from '../stores/eventStore';
 const baseURL = import.meta.env.VITE_APP_API;
 const productStore = useProductStore();
-const eventStore = useEventStore();
+// const eventStore = useEventStore();
 
-productStore.doGetProdutTop();
-eventStore.doGetEventTop();
+// productStore.doGetProdutTop();
+// eventStore.doGetEventTop();
+
+let categoryName = '신제품';
+productStore.doGetProdutMain('A');
+
+const getProductMain = (code) => {
+  if (code == 'A') {
+    categoryName = '신제품';
+    productStore.doGetProdutMain(code);
+  } else if (code == 'B') {
+    categoryName = '기초장비';
+    productStore.doGetProdutMain(code);
+  } else if (code == 'C') {
+    categoryName = 'BioScience';
+    productStore.doGetProdutMain(code);
+  } else if (code == 'D') {
+    categoryName = 'Genomics';
+    productStore.doGetProdutMain(code);
+  } else if (code == 'E') {
+    categoryName = 'Cellomics';
+    productStore.doGetProdutMain(code);
+  }
+};
 </script>
 
 <template>
   <div>
+    <div class="row container p-0 m-0">
+      <div class="col p-0">
+        <div class="d-grid gap-0">
+          <button
+            class="btn btn-secondary border-end rounded-0"
+            type="button"
+            @mouseenter="getProductMain('A')"
+          >
+            <nobr>
+              <img
+                src="@/assets/images/btn_bg_01.gif"
+                width="30px;"
+                height="30px;"
+                style="margin-right: 10px"
+              />신제품
+            </nobr>
+          </button>
+        </div>
+      </div>
+      <div class="col p-0">
+        <div class="d-grid gap-0">
+          <button
+            class="btn btn-secondary border-end rounded-0"
+            type="button"
+            @mouseenter="getProductMain('B')"
+          >
+            <nobr>
+              <img
+                src="@/assets/images/btn_bg_02.gif"
+                width="30px;"
+                height="30px;"
+                style="margin-right: 10px"
+              />기초장비
+            </nobr>
+          </button>
+        </div>
+      </div>
+      <div class="col p-0">
+        <div class="d-grid gap-0">
+          <button
+            class="btn btn-secondary border-end rounded-0"
+            type="button"
+            @mouseenter="getProductMain('C')"
+          >
+            <nobr>
+              <img
+                src="@/assets/images/btn_bg_03.gif"
+                width="30px;"
+                height="30px;"
+                style="margin-right: 10px"
+              />BioScience
+            </nobr>
+          </button>
+        </div>
+      </div>
+      <div class="col p-0">
+        <div class="d-grid gap-0">
+          <button
+            class="btn btn-secondary border-end rounded-0"
+            type="button"
+            @mouseenter="getProductMain('D')"
+          >
+            <nobr>
+              <img
+                src="@/assets/images/btn_bg_04.gif"
+                width="30px;"
+                height="30px;"
+                style="margin-right: 10px"
+              />Genomics
+            </nobr>
+          </button>
+        </div>
+      </div>
+      <div class="col p-0">
+        <div class="d-grid gap-0">
+          <button
+            class="btn btn-secondary rounded-0"
+            type="button"
+            @mouseenter="getProductMain('E')"
+          >
+            <nobr>
+              <img
+                src="@/assets/images/btn_bg_05.gif"
+                width="30px;"
+                height="30px;"
+                style="margin-right: 10px"
+              />Cellomics
+            </nobr>
+          </button>
+        </div>
+      </div>
+    </div>
     <div>
       <p class="h5 d-flex mt-2">
         <span style="padding-top: 0px; padding-right: 5px"
           ><i class="bi bi-square" style="font-size: 20px"></i></span
-        >분야별 제품정보
+        >{{ categoryName }}
       </p>
       <hr class="mb-2" />
 
@@ -24,7 +138,11 @@ eventStore.doGetEventTop();
           <div class="card h-100">
             <div v-for="(file, i) in prd.files" :key="i">
               <div v-if="file.kind == 'main'">
-                <img class="card-img-top" :src="`${baseURL}/product/image/${file.savedFileName}`" />
+                <img
+                  class="card-img-top"
+                  :src="`${baseURL}/product/image/${file.savedFileName}`"
+                  style="height: 200px"
+                />
               </div>
             </div>
             <div class="card-body">
@@ -34,65 +152,17 @@ eventStore.doGetEventTop();
               </p>
             </div>
 
-            <RouterLink
-              class="btn btn-secondary"
-              :to="{
-                name: 'product-detail',
-                query: { mainId: prd.menuMainId, subId: prd.menuSubId, id: prd.id },
-              }"
-              >Go Detail</RouterLink
-            >
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr />
-    <div>
-      <p class="h5 d-flex mt-2">
-        <span style="padding-top: 0px; padding-right: 5px"
-          ><i class="bi bi-square" style="font-size: 20px"></i></span
-        >이벤트
-      </p>
-      <hr class="mb-2" />
-      <div class="text-center h4" v-if="eventStore.state.items.length == 0">
-        진행중인 이벤트가 없습니다.
-      </div>
-      <div class="accordion accordion-flush" id="accordionFlushExample">
-        <div class="accordion-item" v-for="(item, index) in eventStore.state.items" :key="index">
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              :data-bs-target="`#flush-collapseOne-${index}`"
-              aria-expanded="false"
-              :aria-controls="`flush-collapseOne-${index}`"
-              style="border-bottom: 1px solid gray"
-            >
-              <i class="bi bi-asterisk" style="margin-right: 5px"></i>
-              {{ item.title }}
-            </button>
-          </h2>
-          <div
-            :id="`flush-collapseOne-${index}`"
-            class="accordion-collapse collapse"
-            data-bs-parent="#accordionFlushExample"
-          >
-            <div class="accordion-body wrap-text">
-              {{ item.contents }}
-            </div>
-            <div class="accordion-body text-center" v-if="item.imgFile">
-              <img
-                :src="`${baseURL}/event/files/${item.imgFile.savedFileName}`"
-                style="max-width: 100%"
-              />
-            </div>
-            <div class="accordion-body text-center" v-if="item.file">
-              <a
-                class="btn btn-sm btn-danger"
-                :href="`${baseURL}/event/files/${item.file.savedFileName}`"
-                target="_blank"
-                >이벤트 내용 상세보기</a
+            <div class="card-footer text-end p-1">
+              <small class="text-body-secondary"
+                ><RouterLink
+                  class="btn btn-sm btn-outline-secondary"
+                  :to="{
+                    name: 'product-detail',
+                    query: { id: prd.id },
+                  }"
+                >
+                  상세보기
+                </RouterLink></small
               >
             </div>
           </div>
@@ -101,3 +171,23 @@ eventStore.doGetEventTop();
     </div>
   </div>
 </template>
+
+<style scoped>
+.icon-play {
+  background-image: url(@/assets/images/btn_bg_01.gif);
+  background-size: cover;
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.btn-secondary {
+  background-color: #9f9f9a;
+}
+
+.btn-secondary:hover {
+  background-color: #333;
+}
+</style>

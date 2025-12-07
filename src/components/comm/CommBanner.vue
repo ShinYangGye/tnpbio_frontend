@@ -8,7 +8,7 @@ defineProps(['items']);
 </script>
 
 <template>
-  <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+  <div id="carouselExampleDark" class="carousel carousel-dark slide m-0" data-bs-ride="carousel">
     <div class="carousel-indicators mb-0">
       <button
         type="button"
@@ -52,7 +52,7 @@ defineProps(['items']);
           }"
           v-if="item.type == 'product'"
         >
-          <img :src="`${baseURL}/banner/image/${item.file.savedFileName}`" class="h-100"
+          <img :src="`${baseURL}/banner/image/${item.file.savedFileName}`" class="h-100 container"
         /></RouterLink>
         <RouterLink
           :to="{
@@ -61,7 +61,7 @@ defineProps(['items']);
           }"
           v-if="item.type == 'event'"
         >
-          <img :src="`${baseURL}/banner/image/${item.file.savedFileName}`" class="h-100"
+          <img :src="`${baseURL}/banner/image/${item.file.savedFileName}`" class="h-100 container"
         /></RouterLink>
       </div>
 

@@ -29,8 +29,11 @@ const getMenuSub = async (subId) => await axiosInterceptor.get(`/menu/sub/${subI
 const getProductList = async (mainId, subId) =>
   await axiosInterceptor.get(`/product/list/${mainId}/${subId}`);
 
-// 상품 목록 조회
+// 상품 목록 조회 top 4
 const getProductTop = async () => await axiosInterceptor.get(`/product/list-top`);
+
+// 상품 목록 조회 메인화면
+const getProductMain = async (code) => await axiosInterceptor.get(`/product/list-main/${code}`);
 
 // 상품 상세 조회
 const getProductDetail = async (id) => await axiosInterceptor.get(`/product/detail/${id}`);
@@ -50,6 +53,7 @@ export {
   getMenuSub,
   getProductList,
   getProductTop,
+  getProductMain,
   getProductDetail,
   getBannerList,
 };

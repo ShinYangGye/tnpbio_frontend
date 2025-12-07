@@ -1,5 +1,27 @@
 <template>
-  <div class="container-fluid text-center" style="background-color: #a4a0a0">
+  <div class="container-fluid p-0 mt-5 fixed-bottom">
+    <table cellspacing="0" cellpadding="0">
+      <tr class="text-center">
+        <td width="50%" style="background-color: #9f9f99">
+          <table style="width: 100%">
+            <tr>
+              <td><img src="@/assets/images/footer_logo_2.gif" width="150" /></td>
+              <td class="text-end" style="color: white">
+                <h6><nobr>제품문의</nobr></h6>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td width="50"><img src="@/assets/images/footer_center.gif" height="68" /></td>
+        <td width="50%" style="background-color: #575757; color: white">
+          <h6>033 - XXXX - XXXX | tnpbio@tnpbio.kr</h6>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!--
+  <div class="container-fluid text-center h-100" style="background-color: #a4a0a0">
     <div class="container p-2">
       <div class="row">
         <div class="col d-none d-md-block">
@@ -14,8 +36,9 @@
         </div>
       </div>
     </div>
-    <!--
+
     <div><p>&copy;2025. T&P BIO Co. all rights reserved.</p></div>
-    -->
+
   </div>
+   -->
 </template>

@@ -18,12 +18,23 @@ const setProductDivShow = () => {
 <template>
   <div
     class="container d-none d-md-block"
-    style="padding: 25px"
+    style="padding: 15px"
     onmouseover="document.getElementById('top1').style.display='none'; document.getElementById('top2').style.display='none';document.getElementById('top3').style.display='none';"
   >
-    <RouterLink class="navbar-brand" :to="{ name: 'home' }"
-      ><img src="@/assets/images/tnp_logo_sm.png" style="width: 160px"
-    /></RouterLink>
+    <table>
+      <tr>
+        <td>
+          <RouterLink class="navbar-brand" :to="{ name: 'home' }"
+            ><img src="@/assets/images/header_logo.gif" style="width: 220px"
+          /></RouterLink>
+        </td>
+        <td class="p-2 text-center">
+          <strong style="font-size: 12px; color: #006f0f; line-height: 0px"
+            >(주)비엠에스 / Bio-Rad<br />강원특별자치도 공식인증대리점</strong
+          >
+        </td>
+      </tr>
+    </table>
   </div>
   <nav
     class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark"
@@ -67,7 +78,12 @@ const setProductDivShow = () => {
             class="nav-item mx-3"
             onmouseover="document.getElementById('top1').style.display='none'; document.getElementById('top2').style.display='none';document.getElementById('top3').style.display='block';"
           >
-            <span class="nav-link active" style="cursor: pointer">이벤트</span>
+            <RouterLink
+              :to="{ name: 'event', query: { status: 'A' } }"
+              class="nav-link active"
+              style="cursor: pointer"
+              >이벤트</RouterLink
+            >
           </li>
           <li
             class="nav-item mx-3"
@@ -116,17 +132,17 @@ const setProductDivShow = () => {
       </p>
       <div class="px-4">
         <p class="fs-6">
-          <RouterLink class="text-decoration-none" :to="{ name: 'event', query: { status: 'A' } }"
+          <RouterLink class="text-decoration-none1" :to="{ name: 'event', query: { status: 'A' } }"
             >- 전체</RouterLink
           >
         </p>
         <p class="fs-6">
-          <RouterLink class="text-decoration-none" :to="{ name: 'event', query: { status: 'I' } }"
+          <RouterLink class="text-decoration-none1" :to="{ name: 'event', query: { status: 'I' } }"
             >- 진행중</RouterLink
           >
         </p>
         <p class="fs-6">
-          <RouterLink class="text-decoration-none" :to="{ name: 'event', query: { status: 'E' } }"
+          <RouterLink class="text-decoration-none1" :to="{ name: 'event', query: { status: 'E' } }"
             >- 종료</RouterLink
           >
         </p>
@@ -153,5 +169,15 @@ const setProductDivShow = () => {
   display: none;
   position: absolute;
   width: 100%;
+}
+
+.text-decoration-none1 {
+  color: black;
+  text-decoration: none;
+}
+
+.text-decoration-none1:hover {
+  color: black;
+  text-decoration: underline;
 }
 </style>

@@ -19,10 +19,18 @@ const getProductSubList = (sub) => {
   <div class="text-start">
     <div class="btn-group">
       <span class="btn"> {{ productStore.state.navMainMenu }} </span>
-      <ul class="dropdown-menu rounded-0 p-2">
-        <li v-for="(menu, index) in productStore.state.menus" :key="index">
-          <spa style="cursor: pointer" @click="getProductList(menu.id)">{{ menu.menuName }}</spa>
-        </li>
+      <ul class="dropdown-menu rounded-0 p-0">
+        <div class="list-group rounded-0 m-0">
+          <button
+            type="button"
+            class="list-group-item list-group-item-action"
+            v-for="(menu, index) in productStore.state.menus"
+            :key="index"
+            @click="getProductList(menu.id)"
+          >
+            <nobr>{{ menu.menuName }}</nobr>
+          </button>
+        </div>
       </ul>
     </div>
 
@@ -32,10 +40,18 @@ const getProductSubList = (sub) => {
       <span class="btn">
         <span>{{ productStore.state.navSubMenu }}</span>
       </span>
-      <ul class="dropdown-menu rounded-0 p-2">
-        <li v-for="(sub, index) in productStore.state.menuDetail.menuSub" :key="index">
-          <spa style="cursor: pointer" @click="getProductSubList(sub)">{{ sub.menuName }} </spa>
-        </li>
+      <ul class="dropdown-menu rounded-0 p-0">
+        <div class="list-group rounded-0 m-0">
+          <button
+            type="button"
+            class="list-group-item list-group-item-action"
+            v-for="(sub, index) in productStore.state.menuDetail.menuSub"
+            :key="index"
+            @click="getProductSubList(sub)"
+          >
+            <nobr>{{ sub.menuName }}</nobr>
+          </button>
+        </div>
       </ul>
     </div>
   </div>
@@ -44,10 +60,8 @@ const getProductSubList = (sub) => {
 <style scoped>
 .btn-group:hover > .dropdown-menu {
   display: block;
-  background-color: #ccc;
   position: absolute;
   top: 30px;
   left: 10px;
-  color: black;
 }
 </style>

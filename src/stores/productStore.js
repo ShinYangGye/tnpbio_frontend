@@ -9,6 +9,7 @@ import {
   getProductList,
   getProductDetail,
   getProductTop,
+  getProductMain,
 } from '../api/commUseApi';
 
 const toast = useToast();
@@ -81,8 +82,7 @@ export const useProductStore = defineStore('product', () => {
       state.menuDetail.menuSub = menu.menuSub;
 
       state.menuMainId = menu.id;
-      state.navString = state.menuDetail.name;
-      // state.navMainMenu = state.menuDetail.name;
+      state.navMainMenu = state.menuDetail.name;
     } catch (error) {
       toast.error('데이타 조회시 오류가 발생했습니다. 잠시후 다시 확인해 주세요.');
       console.log(error);
@@ -143,6 +143,12 @@ export const useProductStore = defineStore('product', () => {
         state.menuSubId = resProduct.data.menuSubId;
         let resMenu = await getMenus();
         const menuInfo = resMenu.data.find((item) => item.id == state.menuMainId);
+
+        state.menuDetail.name = menuInfo.menuName;
+        state.menuDetail.info = menuInfo.menuInfo;
+        state.menuDetail.fileName = menuInfo.file.savedFileName;
+        state.menuDetail.menuSub = menuInfo.menuSub;
+
         state.menuSubDetail = menuInfo.menuSub.find((item) => item.id == state.menuSubId);
 
         // 상단 네비게이션
@@ -173,5 +179,29 @@ export const useProductStore = defineStore('product', () => {
     }
   }
 
-  return { state, doGetMenus, doGetMenuInfo, doGetProducts, doGetProductDetail, doGetProdutTop };
+  // 상품 상위 4개 조회
+  async function doGetProdutMain(code) {
+    try {
+      let res = await getProductMain(code);
+      console.log('main---------', res);
+      if (res.status == 200) {
+        state.products = res.data;
+      } else {
+        toast.error('데이타 조회시 오류가 발생했습니다. 잠시후 다시 확인해 주세요1');
+      }
+    } catch (error) {
+      toast.error('데이타 조회시 오류가 발생했습니다. 잠시후 다시 확인해 주세요2');
+      console.log(error);
+    }
+  }
+
+  return {
+    state,
+    doGetMenus,
+    doGetMenuInfo,
+    doGetProducts,
+    doGetProductDetail,
+    doGetProdutTop,
+    doGetProdutMain,
+  };
 });
