@@ -8,8 +8,8 @@ const productStore = useProductStore();
 // productStore.doGetProdutTop();
 // eventStore.doGetEventTop();
 
-let categoryName = '신제품';
-productStore.doGetProdutMain('A');
+let categoryName = '';
+// productStore.doGetProdutMain('A');
 
 const getProductMain = (code) => {
   if (code == 'A') {
@@ -126,13 +126,14 @@ const getProductMain = (code) => {
       </div>
     </div>
     <div>
-      <p class="h5 d-flex mt-2">
-        <span style="padding-top: 0px; padding-right: 5px"
-          ><i class="bi bi-square" style="font-size: 20px"></i></span
-        >{{ categoryName }}
-      </p>
-      <hr class="mb-2" />
-
+      <div v-show="categoryName !== ''">
+        <p class="h5 d-flex mt-2">
+          <span style="padding-top: 0px; padding-right: 5px"
+            ><i class="bi bi-square" style="font-size: 20px"></i></span
+          >{{ categoryName }}
+        </p>
+        <hr class="mb-2" />
+      </div>
       <div class="row row-cols-1 row-cols-md-4 g-2">
         <div class="col" v-for="(prd, index) in productStore.state.products" :key="index">
           <div class="card h-100">

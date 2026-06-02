@@ -38,11 +38,14 @@ eventStore.doGetEventDetail(route.query.id);
         v-if="eventStore.state.itemDetail.file"
         >이벤트 내용 상세보기</a
       >
+      <!--
       <router-link
         class="btn btn-sm btn-secondary mx-1"
         :to="{ name: 'event', query: { status: 'A' } }"
         >목록</router-link
       >
+      -->
+      <a href="/event?status=A" class="btn btn-sm btn-secondary mx-1">목록</a>
     </div>
   </div>
 </template>

@@ -12,25 +12,26 @@ productStore.doGetProductDetail(id);
 </script>
 <template>
   <div class="row row-cols-1 row-cols-md-2 g-1">
-    <div class="col">
+    <div class="col" style="margin-bottom: 100px">
       <!-- 상품 이미지 ---------->
-      <div class="carousel slide bg-transparent" id="carouselDemo">
+      <div class="carousel slide bg-transparent h-100" id="carouselDemo">
         <div class="carousel-inner">
           <div
-            class="carousel-item border border-secondary-subtle"
+            class="carousel-item border border-secondary-subtle h-100 p-2"
+            style="align-items: center"
             :class="{ active: file.kind == 'main' }"
             v-for="(file, index) in productStore.state.productDetail.files"
             :key="index"
           >
             <img
               :src="`${baseURL}/product/image/${file.savedFileName}`"
-              class="w-100 h-100"
+              class="w-100"
               v-if="file.kind == 'main' || file.kind == 'sub'"
             />
           </div>
         </div>
 
-        <div class="carousel-indicators mb-5">
+        <div class="carousel-indicators">
           <div v-for="(file, index) in productStore.state.productDetail.files" :key="index">
             <button
               type="button"
@@ -138,10 +139,7 @@ productStore.doGetProductDetail(id);
         >
           <div v-for="(file, index) in productStore.state.productDetail.files" :key="index">
             <div v-if="file.kind == 'use'">
-              <img
-                class="img-fluid rounded-start"
-                :src="`${baseURL}/product/image/${file.savedFileName}`"
-              />
+              <img class="rounded-start" :src="`${baseURL}/product/image/${file.savedFileName}`" />
             </div>
           </div>
         </div>
@@ -154,10 +152,7 @@ productStore.doGetProductDetail(id);
         >
           <div v-for="(file, index) in productStore.state.productDetail.files" :key="index">
             <div v-if="file.kind == 'spec'">
-              <img
-                class="img-fluid rounded-start"
-                :src="`${baseURL}/product/image/${file.savedFileName}`"
-              />
+              <img class="rounded-start" :src="`${baseURL}/product/image/${file.savedFileName}`" />
             </div>
           </div>
         </div>
